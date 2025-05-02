@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Smart Farming App
 
 A real-time monitoring and control system for smart farming applications. This application provides a modern web interface for monitoring soil conditions, weather data, and controlling irrigation systems.
@@ -87,3 +88,6 @@ smart-farming-app/
 ## License
 
 MIT License
+=======
+# Smart-Farm-Application
+>>>>>>> 895fcd29c7cc88e90c68a6b83cf8052ff09c9a5b
