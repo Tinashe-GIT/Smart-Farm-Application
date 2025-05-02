@@ -1,50 +1,89 @@
-# Welcome to your Expo app 👋
+# Smart Farming App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A real-time monitoring and control system for smart farming applications. This application provides a modern web interface for monitoring soil conditions, weather data, and controlling irrigation systems.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Real-time sensor data monitoring
+- Soil condition tracking (moisture, temperature, pH, NPK levels)
+- Weather monitoring (temperature, humidity, pressure, rainfall)
+- Automated irrigation control
+- Responsive web interface
+- Data simulation for testing
 
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn package manager
+
+## Installation
+
+1. Clone the repository:
    ```bash
+   git clone [repository-url]
+   cd smart-farming-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   # Install server dependencies
+   cd server
+   npm install
+
+   # Install client dependencies
+   cd ../app
    npm install
    ```
 
-2. Start the app
+## Configuration
 
+1. Start the server first to get available IP addresses:
    ```bash
-    npx expo start
+   cd server
+   node index.js
    ```
 
-In the output, you'll find options to open the app in a
+2. Note the IP address displayed in the console.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+3. Update the WebSocket connection URL in `app/config.ts` with your server's IP address.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Running the Application
 
-## Get a fresh project
+1. Start the server:
+   ```bash
+   cd server
+   node index.js
+   ```
 
-When you're ready, run:
+2. In a new terminal, start the client application:
+   ```bash
+   cd app
+   npm run dev
+   ```
 
-```bash
-npm run reset-project
+3. Open your browser and navigate to the URL shown in the terminal (typically http://localhost:3000)
+
+## Development
+
+- The server uses a simulator to generate realistic sensor data
+- WebSocket is used for real-time communication
+- The client is built with Next.js and Tailwind CSS
+- Material-UI components are used for the interface
+
+## Project Structure
+
+```
+smart-farming-app/
+├── app/                # Next.js client application
+│   ├── components/     # React components
+│   ├── pages/         # Next.js pages
+│   └── config.ts      # Configuration file
+├── server/            # Backend server
+│   ├── index.js       # Main server file
+│   └── simulator.js   # Data simulator
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## License
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+MIT License

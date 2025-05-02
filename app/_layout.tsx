@@ -1,39 +1,106 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import { PaperProvider } from 'react-native-paper';
+import { ThemeProvider, useThemeContext } from '../context/ThemeContext';
+import { WebSocketProvider } from '../context/WebSocketContext';
+import { AppHeader } from '../components/AppHeader';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
+function RootLayoutNav() {
+  const { theme, isDarkMode, toggleTheme } = useThemeContext();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+    <PaperProvider theme={theme}>
+      <WebSocketProvider>
+        <Stack>
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Smart Farm"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="profile"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Profile"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="settings"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Settings"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="crop-types"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Crop Types"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="irrigation-settings"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Irrigation Settings"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="soil-monitoring"
+            options={{
+              headerShown: true,
+              header: () => (
+                <AppHeader
+                  title="Soil Monitoring"
+                  isDarkMode={isDarkMode}
+                  onToggleTheme={toggleTheme}
+                />
+              ),
+            }}
+          />
+        </Stack>
+        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
+      </WebSocketProvider>
+    </PaperProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutNav />
     </ThemeProvider>
   );
 }
